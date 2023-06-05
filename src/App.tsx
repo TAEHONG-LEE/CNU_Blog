@@ -12,10 +12,12 @@ function App() {
     <Router>
       <Routes>
         <Route element={<Header />}>
+          {/* 헤더가 전부를 포함해야한다. */}
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/resume" element={<Resume />} />
           </Route>
+          <Route path={"/post/:postId" element={<Post />}></Route>
           {/*todo (3-3) Post 추가*/}
         </Route>
         {/*todo (5-1) Write 추가*/}

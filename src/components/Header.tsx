@@ -28,13 +28,13 @@ const Header = () => {
     <div>
       <Wrapper>
         <Link to="/">
-          <h2>kimsudal.log</h2>
+          <h2>2t_hong.log</h2>
         </Link>
         <Link to="/write">
           <Button className="write-button">글쓰기</Button>
         </Link>
       </Wrapper>
-      <Outlet />
+      <Outlet /> {/* 이걸 선언함으로써 아래의 구성요소들이 Header 밑에 들어간다. */}
     </div>
   );
 };

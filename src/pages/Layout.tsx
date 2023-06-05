@@ -13,9 +13,11 @@ const Nav = styled.div`
   font-weight: 600;
   margin: auto;
   padding-top: 20px;
+
   a {
     color: #777;
   }
+
   .active {
     color: rgb(50, 148, 248);
   }
@@ -58,16 +60,18 @@ const Layout = () => {
   return (
     <div>
       <Profile>
-        {/*todo (1) 프로필 꾸미기*/}
         <div>
-          <ProfilePicture src="" alt="프로필 사진" />
+          <ProfilePicture src="https://blog.kakaocdn.net/dn/596tb/btqxsB3prG1/2CQ0x5YxQCNqUgmBrKf8rk/img.png" alt="프로필 사진 안되는데요" />
         </div>
         <div>
           <Name>이름</Name>
           <Description>설명</Description>
         </div>
       </Profile>
-      <Nav>{/*todo (2) 메뉴 작성*/}</Nav>
+      <Nav>
+        <NavLink to="/">포스트</NavLink>
+        <NavLink to="/resume">소개</NavLink>
+      </Nav>
       <Outlet />
     </div>
   );
