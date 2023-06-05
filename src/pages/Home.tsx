@@ -35,9 +35,8 @@ const Home = () => {
   return (
     <div>
       {list.map(item => (
-        <PostListItem key={item.post.id} {...item.post}></PostListItem>
+        <PostListItem key={item.post.id} {...item.post} />
       ))}
-      {/*todo (3-1) post 목록 작성*/}
     </div>
   );
 };

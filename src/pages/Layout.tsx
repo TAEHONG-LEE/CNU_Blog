@@ -13,11 +13,9 @@ const Nav = styled.div`
   font-weight: 600;
   margin: auto;
   padding-top: 20px;
-
   a {
     color: #777;
   }
-
   .active {
     color: rgb(50, 148, 248);
   }
@@ -61,11 +59,11 @@ const Layout = () => {
     <div>
       <Profile>
         <div>
-          <ProfilePicture src="https://blog.kakaocdn.net/dn/596tb/btqxsB3prG1/2CQ0x5YxQCNqUgmBrKf8rk/img.png" alt="프로필 사진 안되는데요" />
+          <ProfilePicture src="https://t1.daumcdn.net/cfile/tistory/99107A335C1EED5005" alt="프로필 사진" />
         </div>
         <div>
-          <Name>이름</Name>
-          <Description>설명</Description>
+          <Name>제시</Name>
+          <Description>브롤스타즈~</Description>
         </div>
       </Profile>
       <Nav>

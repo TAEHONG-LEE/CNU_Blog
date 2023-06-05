@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { IPostWithAd, IResponsePostList } from './types';
 
 const instance = axios.create({
@@ -10,7 +10,7 @@ const instance = axios.create({
 
 // todo (6) api 작성
 
-export const getPostList = () => {
+export const getPostList = (): Promise<AxiosResponse<IResponsePostList>> => {
   return instance.get('/posts');
 };
 
@@ -18,8 +18,8 @@ export const createPost = () => {
   return null;
 };
 
-export const getPostById = () => {
-  return null;
+export const getPostById = (id: number) => {
+  return instance.get(`/post/${id}`);
 };
 
 export const updatePostById = () => {
