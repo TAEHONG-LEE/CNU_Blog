@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { deletePostById, getPostById } from '../api';
-import { IAdvertisement, IPost } from '../api/types';
+import { IPost } from '../api/types';
 import NotFound from '../components/NotFound';
 import Tag from '../components/Tag';
-import { request } from 'axios';
 
 const Title = styled.h1`
   font-size: 3rem;
@@ -87,7 +86,7 @@ const Post = () => {
 
   const requestDeletePostById = async () => {
     await deletePostById(postId);
-    navigate('/');
+    // navigate('/');
   };
 
   // todo (4) post 컴포넌트 작성
