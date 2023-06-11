@@ -13,9 +13,11 @@ const Nav = styled.div`
   font-weight: 600;
   margin: auto;
   padding-top: 20px;
+
   a {
     color: #777;
   }
+
   .active {
     color: rgb(50, 148, 248);
   }
@@ -62,8 +64,8 @@ const Layout = () => {
           <ProfilePicture src="https://t1.daumcdn.net/cfile/tistory/99107A335C1EED5005" alt="프로필 사진" />
         </div>
         <div>
-          <Name>제시</Name>
-          <Description>브롤스타즈~</Description>
+          <Name>태홍</Name>
+          <Description>김수정강사님 감사해요. 사실 밥사달라고 하려했는데 바쁘셔서 못했네요. 감사합니다.</Description>
         </div>
       </Profile>
       <Nav>

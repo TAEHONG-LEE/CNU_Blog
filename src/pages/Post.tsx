@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { deletePostById, getPostById } from '../api';
 import { IPost } from '../api/types';
@@ -60,13 +60,26 @@ const Text = styled.p`
 `;
 
 const Post = () => {
+  const navigate = useNavigate();
   const { postId } = useParams() as { postId: string };
   const [post, setPost] = useState<IPost | null>(null);
-
+  // const [ad, setAd] = useState<IAdvertisement | null>(null);
   const fetchPostById = async () => {
     const { data } = await getPostById(postId);
     const { post } = data;
     setPost(post);
+    // setAd(advertisement);
+  };
+
+  const clickDeleteButton = () => {
+    const result = window.confirm('정말로 게시글을 삭제하시겠습니까?');
+    if (result) {
+      requestDeletePostById();
+    }
+  };
+  const requestDeletePostById = async () => {
+    await deletePostById(postId);
+    navigate('/');
   };
 
   useEffect(() => {
@@ -77,18 +90,6 @@ const Post = () => {
     return <NotFound />;
   }
 
-  const clickDeleteButton = () => {
-    const result = window.confirm('정말로 게시글을 삭제하시겠습니까?');
-    if (result) {
-      requestDeletePostById();
-    }
-  };
-
-  const requestDeletePostById = async () => {
-    await deletePostById(postId);
-    // navigate('/');
-  };
-
   // todo (4) post 컴포넌트 작성
   return (
     <div style={{ margin: '5.5rem auto', width: '700px' }}>
@@ -96,14 +97,13 @@ const Post = () => {
         <Title>{post?.title}</Title>
         <Toolbar>
           <Info>
-            <div>n분전</div>
+            <div>n분전~</div>
           </Info>
           <div>
             <Link to="/write" state={{ postId }} style={{ marginRight: 10 }}>
-              {/*todo 수정/삭제 버튼 작성*/}
               <TextButton>수정</TextButton>
             </Link>
-            <TextButton onClick={clickDeleteButton}> 삭제 </TextButton>
+            <TextButton onClick={clickDeleteButton}>삭제</TextButton>
           </div>
         </Toolbar>
         {post?.tag && (
@@ -120,5 +120,4 @@ const Post = () => {
     </div>
   );
 };
-
 export default Post;

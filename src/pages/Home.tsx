@@ -6,13 +6,13 @@ import NoPostList from '../components/NoPostList';
 
 const Home = () => {
   const [postList, setPostList] = useState<IResponsePostList>([]);
-
-  const fetchAPostList = async () => {
+  const fetchPostList = async () => {
     const { data } = await getPostList();
     setPostList(data);
   };
+
   useEffect(() => {
-    fetchAPostList();
+    fetchPostList();
   }, []);
 
   if (postList.length === 0) {
@@ -21,8 +21,8 @@ const Home = () => {
 
   return (
     <div>
-      {postList.map(item => (
-        <PostListItem key={item.post.id} {...item.post} />
+      {postList.map(({ post }, index) => (
+        <PostListItem key={index} id={post.id} title={post.title} contents={post.contents} tag={post.tag} />
       ))}
     </div>
   );

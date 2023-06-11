@@ -1,8 +1,8 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import styled from '@emotion/styled';
-import { TAG } from '../api/types';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import styled from '@emotion/styled';
 import { createPost, getPostById, updatePostById } from '../api';
+import { TAG } from '../api/types';
 
 const TitleInput = styled.input`
   display: block;
@@ -85,43 +85,31 @@ const SaveButton = styled.button`
 `;
 
 const Write = () => {
+  const { state } = useLocation();
+  const isEdit = state?.postId;
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tag, setTag] = useState<TAG>(TAG.REACT);
   const tagList = Object.keys(TAG);
-  const { state } = useLocation();
-  const isEdit = state?.postId;
 
-  const fetchPostById = async (postId: string) => {
-    const { data } = await getPostById(postId);
-    const { post } = data;
-    setTitle(post.title);
-    setContent(post.contents);
-    setTag(post.tag);
-  };
-
-  useEffect(() => {
-    if (isEdit) {
-      fetchPostById(state.postId);
-    }
-  }, []);
-
-  const requestUpdatePost = async () => {
-    await updatePostById(state.postId, title, content, tag);
-  };
   const handleChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
   const handleChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
   };
+
   const handleChangeTag = (event: ChangeEvent<HTMLSelectElement>) => {
     setTag(event.target.value as TAG);
   };
 
-  const navigate = useNavigate();
   const requestCreatePost = async () => {
     await createPost(title, content, tag);
+  };
+
+  const requestUpdatePost = async () => {
+    await updatePostById(state.postId, title, content, tag);
   };
 
   const clickConfirm = () => {
@@ -138,7 +126,20 @@ const Write = () => {
     navigate('/');
   };
 
-  // todo (5) 게시글 작성 페이지 만들기
+  const fetchPostById = async (postId: string) => {
+    const { data } = await getPostById(postId);
+    const { post } = data;
+    setTitle(post.title);
+    setContent(post.contents);
+    setTag(post.tag);
+  };
+
+  useEffect(() => {
+    if (state?.postId) {
+      fetchPostById(state.postId);
+    }
+  }, []);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ height: 'calc(100% - 4rem)', paddingBottom: '4rem' }}>
